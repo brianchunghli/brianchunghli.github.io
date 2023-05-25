@@ -1,0 +1,58 @@
+---
+import FormattedDate from "./FormattedDate.astro";
+import Tags from "./Tags.astro";
+
+export interface Props {
+    name: string;
+    year: number;
+    code: number;
+    dateCreated: Date;
+    dateUpdated: Date;
+    tags?: Array<string>;
+}
+
+const { name, year, code, dateCreated, dateUpdated, tags = [] } = Astro.props;
+---
+
+<div class="course-link">
+    <small>
+        <FormattedDate date={dateCreated} />
+    </small>
+    <a href={`/notes/COMP${code}`} class="course-link-title">COMP{code} notes</a
+    >
+    <small class="course-link-last-updated">
+        last updated: <FormattedDate date={dateUpdated} />
+    </small>
+    <div class="course-link-tag-container">
+        <Tags>{year}</Tags>
+        <Tags>{name}</Tags>
+        {
+            tags.length > 0 &&
+                tags.map((tag: string) => {
+                    return <Tags>{tag}</Tags>;
+                })
+        }
+    </div>
+</div>
+<style>
+    .course-link {
+        display: flex;
+        flex-direction: column;
+    }
+    .course-link-title {
+        font-size: 1.6em;
+        font-weight: bold;
+    }
+    .course-link-last-updated {
+        color: grey;
+        font-size: 0.8em;
+    }
+    .course-link-title:hover {
+        color: grey;
+    }
+    .course-link-tag-container {
+        display: flex;
+        gap: 5px;
+        padding-top: 10px;
+    }
+</style>

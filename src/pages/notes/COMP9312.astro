@@ -1,0 +1,15 @@
+---
+import PageWrapper from "../../layouts/PageWrapper.astro";
+import NotesWrapper from "../../layouts/NotesWrapper.astro";
+---
+
+<PageWrapper title="COMP9312 Notes" description="COMP9312 notes">
+    <div>
+        <NotesWrapper
+            courseName="Data Analytics for Graphs"
+            dateCreated={new Date("2023-05-23")}
+        >
+            <div>COMP9312</div>
+        </NotesWrapper>
+    </div>
+</PageWrapper>

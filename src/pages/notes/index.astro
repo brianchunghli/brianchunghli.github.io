@@ -1,0 +1,74 @@
+---
+import PageWrapper from "../../layouts/PageWrapper.astro";
+import CourseLink from "../../components/CourseLink.astro";
+
+interface courseObj {
+    name: string;
+    year: number;
+    code: number;
+    created: Date;
+    updated: Date;
+    tags: Array<string>;
+}
+
+const courses = [
+    {
+        name: "Algorithms and Programming Techniques",
+        year: 2023,
+        code: 9101,
+        created: new Date("2023-05-23"),
+        updated: new Date("2023-05-23"),
+        tags: ["Algorithm design"],
+    },
+    {
+        name: "Data Analytics for Graphs",
+        year: 2023,
+        code: 9312,
+        created: new Date("2023-05-22"),
+        updated: new Date("2023-05-23"),
+        tags: ["Graphs", "Graph algorithms"],
+    },
+    {
+        name: "Web Data Compression",
+        year: 2023,
+        code: 9319,
+        created: new Date("2023-05-23"),
+        updated: new Date("2023-05-23"),
+        tags: ["Web Data", "Compression algorithms", "C++"],
+    },
+];
+---
+
+<PageWrapper title="Notes" description="Notes page">
+    <div class="pages-links">
+        {
+            courses
+                .sort((a: courseObj, b: courseObj) => {
+                    return (
+                        b.year - a.year ||
+                        b.created.getTime() - a.created.getTime()
+                    );
+                })
+                .map((course) => {
+                    return (
+                        <CourseLink
+                            name={course.name}
+                            year={course.year}
+                            code={course.code}
+                            dateCreated={course.created}
+                            dateUpdated={course.updated}
+                            tags={course.tags}
+                        />
+                    );
+                })
+        }
+    </div>
+</PageWrapper>
+
+<style>
+    .pages-links {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+</style>

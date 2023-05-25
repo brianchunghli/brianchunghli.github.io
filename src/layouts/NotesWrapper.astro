@@ -1,0 +1,49 @@
+---
+import FormattedDate from "../components/FormattedDate.astro";
+interface Props {
+    courseName: string;
+    dateCreated: Date;
+}
+
+const { courseName, dateCreated } = Astro.props;
+---
+
+<div class="course-note-wrapper">
+    <div>
+        <div class="course-note-header">
+            <div class="course-note-title">{courseName}</div>
+            <small
+                >Created by Brian Li on <FormattedDate date={dateCreated} />
+            </small>
+        </div>
+        <div>
+            <div>Course Notes</div>
+            <hr class="note-separator" />
+        </div>
+        <div><slot /></div>
+    </div>
+
+    <style>
+        .course-notes {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+
+            padding: 5px 10px 20px 10px;
+            height: 100vh;
+            max-width: 800px;
+        }
+        .course-note-title {
+            font-size: 1.6em;
+            font-weight: bold;
+        }
+
+        .course-note-header {
+            padding-bottom: 10px;
+        }
+        .note-separator {
+            color: grey;
+            margin-bottom: 10px;
+        }
+    </style>
+</div>
